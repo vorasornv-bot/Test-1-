@@ -1,0 +1,41 @@
+n, m = map(int, input().split())
+
+
+k = int(input())
+
+
+grid = [[0 for _ in range(m)] for _ in range(n)]
+bombs = []
+
+
+for _ in range(k):
+    r, c = map(int, input().split())
+    grid[r][c] = -1
+    bombs.append((r, c))
+
+
+directions = [(-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,-1), (1,0), (1,1)]
+
+
+for r in range(n):
+    for c in range(m):
+        if grid[r][c] == -1: 
+            continue
+        
+        count = 0
+        for dr, dc in directions:
+            nr, nc = r + dr, c + dc
+            
+            if 0 <= nr < n and 0 <= nc < m and grid[nr][nc] == -1:
+                count += 1
+        grid[r][c] = count
+
+
+for r in range(n):
+    row_output = []
+    for c in range(m):
+        if grid[r][c] == -1:
+            row_output.append('x')
+        else:
+            row_output.append(str(grid[r][c]))
+    print(" ".join(row_output))
