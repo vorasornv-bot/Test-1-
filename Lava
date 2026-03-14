@@ -1,0 +1,17 @@
+n, m = map(int, input().split())
+k = int(input())
+
+grid = [['.' for _ in range(m)] for _ in range(n)]
+
+dirs = [(0,0), (-1,0), (1,0), (0,-1), (0,1)]
+
+for _ in range(k):
+    x, y = map(int, input().split())
+    for dx, dy in dirs:
+        nx = x + dx
+        ny = y + dy
+        if 0 <= nx < n and 0 <= ny < m:
+            grid[nx][ny] = 'x'
+
+for row in grid:
+    print(' '.join(row))
